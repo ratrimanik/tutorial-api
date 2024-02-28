@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+use Egulias\EmailValidator\Parser\Comment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'title',
@@ -20,4 +23,10 @@ class Post extends Model
     {
         return $this->belongsTo(User::class, 'author', 'id');
     } //relationship database
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'post_id', 'id'); 
+    }
+    
 }

@@ -2,11 +2,10 @@
 
 namespace App\Http\Resources;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostResource extends JsonResource
+class CommentResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +16,11 @@ class PostResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'news_content' => $this->news_content,
-            'created_at' => date_format($this->created_at, 'd-m-Y H:i'),
+            'post_id' => $this->post_id,
+            'user_id' => $this->user_id,
+            'comments_content' => $this->comments_content,
+            'created_at' => date_format($this->created_at, 'H:i'),
+            'commentator' => $this->whenLoaded('commentator')
         ];
     }
 }
