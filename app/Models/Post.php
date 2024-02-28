@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Egulias\EmailValidator\Parser\Comment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,6 +16,7 @@ class Post extends Model
         'title',
         'news_content',
         'author',
+        'image',
     ];
 
     public function writer(): BelongsTo
@@ -26,7 +26,7 @@ class Post extends Model
 
     public function comments(): HasMany
     {
-        return $this->hasMany(Comment::class, 'post_id', 'id'); 
+        return $this->hasMany(Comment::class, 'post_id', 'id');
     }
     
 }
